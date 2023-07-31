@@ -2,7 +2,6 @@
 
 import os
 import argparse
-import pickle
 import requests
 import bs4
 import re
@@ -81,11 +80,7 @@ def main(args: Args) -> None:
     topics = args.topics
     notes = args.notes
 
-    try:
-        rel_list = pickle.load(open("request.pkl", "rb"))
-    except Exception:
-        rel_list = [{"id": rel_id} for rel_id in get_rel_ids(topics)]
-        pickle.dump(rel_list, open("request.pkl", "wb"))
+    rel_list = [{"id": rel_id} for rel_id in get_rel_ids(topics)]
 
     try:
         title, year = get_title_and_year(arxiv_url)
