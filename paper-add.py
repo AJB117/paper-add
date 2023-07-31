@@ -1,11 +1,11 @@
-# shebang here
+#!/home/psoga/.virtualenvs/paper-add/bin/python3
 
 import os
 import argparse
 import pickle
 import requests
 import bs4
-
+import re
 from typing import List, Tuple
 from dataclasses import dataclass
 from notion_client import Client, APIResponseError
@@ -29,6 +29,12 @@ def get_title_and_year(arxiv_url: str) -> Tuple[str, str]:
     date = soup.find_all("div", {
         "class": ["dateline"]
     })[0].contents[-1].split("Submitted on")[-1][-5:-1]
+
+
+    regex = re.compile(r"(\d{4})")
+    date = regex.search(soup.find_all("div", {
+        "class": ["dateline"]
+    })[0].contents[0].strip()).group(0)
 
     return title, date
 
