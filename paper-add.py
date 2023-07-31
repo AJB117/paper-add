@@ -48,7 +48,7 @@ def get_or_create_rel_id(rel_name: str) -> str:
     })
     if not rel["results"]:
         try:
-            print(f"Creating new relation \"{rel_name}\"...")
+            print(f"Creating new topic \"{rel_name}\"...")
             notion.pages.create(
                 **{
                     "parent": {
@@ -65,8 +65,16 @@ def get_or_create_rel_id(rel_name: str) -> str:
                     }
                 }
             )
+            rel = notion.databases.query(tags_db_id, **{
+                "filter": {
+                    "property": "Name",
+                    "title": {
+                        "equals": rel_name
+                    }
+                }
+            })
         except Exception as e:
-            print(f"Could not create new relation \"{rel_name}\":")
+            print(f"Could not create new topic \"{rel_name}\":")
             print(e)
 
     return rel["results"][0]["id"]
