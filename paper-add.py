@@ -1,4 +1,4 @@
-#!/home/psoga/.virtualenvs/paper-add/bin/python3
+# shebang here
 
 import os
 import argparse
