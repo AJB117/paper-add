@@ -25,11 +25,6 @@ def get_title_and_year(arxiv_url: str) -> Tuple[str, str]:
         "class": ["title", "mathjax"]
     })[0].contents[-1]
 
-    date = soup.find_all("div", {
-        "class": ["dateline"]
-    })[0].contents[-1].split("Submitted on")[-1][-5:-1]
-
-
     regex = re.compile(r"(\d{4})")
     date = regex.search(soup.find_all("div", {
         "class": ["dateline"]
