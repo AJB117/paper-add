@@ -129,9 +129,7 @@ def main(args: Args) -> None:
                     },
                 }
             }
-        notion.pages.create(
-            **obj
-        )
+        notion.pages.create(**obj)
 
     except APIResponseError as error:
         print(error)
